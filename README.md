@@ -40,7 +40,7 @@ This project is licensed under the MIT License.
 
 ## Acknowledgments
 - Inspired by the plotting style of The Economist.
-- Data sourced from Wikipedia with manual scraping.
+- Data sourced from [Wikipedia](https://en.wikipedia.org/wiki/Indonesia_at_the_2024_Summer_Olympics) with manual scraping.
   
 ## Contact
 For questions or feedback, please open an issue on the GitHub repository or contact me at lucaselbert@gmail.com/l.e.suryana@tudelf.nl
