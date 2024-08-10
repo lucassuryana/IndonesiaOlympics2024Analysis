@@ -34,7 +34,6 @@ def plot_medals(ax, filtered_years, filtered_rank, filtered_gold, filtered_silve
                 square_size_1,
                 square_size_2,
                 color='#FDC861',
-                edgecolor='black',
                 zorder=10
             ))
 
@@ -44,7 +43,6 @@ def plot_medals(ax, filtered_years, filtered_rank, filtered_gold, filtered_silve
                 square_size_1,
                 square_size_2,
                 color='#E5E5E5',
-                edgecolor='black',
                 zorder=5
             ))
 
@@ -54,7 +52,6 @@ def plot_medals(ax, filtered_years, filtered_rank, filtered_gold, filtered_silve
                 square_size_1,
                 square_size_2,
                 color='#DCB486',
-                edgecolor='black',
                 zorder=5
             ))
 
@@ -187,7 +184,6 @@ def add_title_and_lines(fig):
             0.02,
             transform=fig.transFigure,
             color='#C91E21',
-            edgecolor='#C91E21',
             zorder=1
         )
     )
