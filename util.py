@@ -189,7 +189,7 @@ def add_title_and_lines(fig):
     )
 
     fig.suptitle(
-        "Indonesia's Performance in 2024 Despite \nLimited Athlete Participation",
+        "Indonesia's Performance in Olympics 2024 \nDespite Limited Athlete Participation",
         fontsize=20,
         fontweight='bold',
         color='red',
