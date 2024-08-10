@@ -77,7 +77,7 @@ def plot_medals(ax, filtered_years, filtered_rank, filtered_gold, filtered_silve
     ax.grid(False)
     ax.text(
         filtered_years[-1] + 2.5, filtered_rank[-1] - 3.5,
-        f'With {filtered_gold[-1]:.0f} golds and {filtered_bronze[-1]:.0f} bronze, \nIndonesia achieved \na ranking of {filtered_rank[-1]:.0f} th',
+        f'With {filtered_gold[-1]:.0f} golds and {filtered_bronze[-1]:.0f} bronze, \nIndonesia achieved \na ranking of {filtered_rank[-1]:.0f}th',
         ha='left', va='center', color='black', fontsize=10,
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none')
     )
@@ -109,7 +109,7 @@ def plot_athletes(ax, filtered_years, filtered_num_athletes, average_num_athlete
     ax.set_xticklabels(filtered_years)
     ax.text(
         filtered_years[-1] + 4, average_num_athletes,
-        f'Average Number of\nIndonesian Athletes \nof all Years:{average_num_athletes:.0f}',
+        f'Average Number of\nIndonesian Athletes \nof all Years: {average_num_athletes:.0f}',
         ha='left', va='center', color='black', fontsize=10,
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none')
     )
@@ -118,6 +118,20 @@ def plot_athletes(ax, filtered_years, filtered_num_athletes, average_num_athlete
         filtered_years[-1] + 4, average_num_athletes + 20,
         f'In the {filtered_years[-1]:.0f} Olympics, \nIndonesia sent \n{filtered_num_athletes[-1]:.0f} athletes',
         ha='left', va='center', color='black', fontsize=10,
+        bbox=dict(facecolor='none', alpha=0.7, edgecolor='none')
+    )
+
+    ax.text(
+        filtered_years[0] - 7 , -15,
+        f'Data Source: Wikipedia - Indonesia \nat the 2024 Summer Olympics',
+        ha='left', va='center', color='#C1C1C1', fontsize=10,
+        bbox=dict(facecolor='none', alpha=0.7, edgecolor='none')
+    )
+
+    ax.text(
+        filtered_years[-1] , -15,
+        f'© 2024 Lucas Elbert Suryana',
+        ha='left', va='center', color='#C1C1C1', fontsize=10,
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none')
     )
     
@@ -138,7 +152,7 @@ def add_images(ax, flag_img_path, logo_img_path, filtered_years, filtered_num_at
     ax.add_artist(AnnotationBbox(imagebox_logo, (1.005, 1.15), frameon=False, pad=0, xycoords='axes fraction', box_alignment=(1, 1)))
 
     # Define the arrow positions
-    arrow_start = (0.926, 0.82)  # Position near the Olympic logo in axes fraction
+    arrow_start = (0.926, 0.78)  # Position near the Olympic logo in axes fraction
     arrow_end = (filtered_years[-1], filtered_num_athletes[-1] + 3)  # Position at the top of the last bar in data space
 
     ax.annotate(
