@@ -98,7 +98,7 @@ def plot_athletes(ax, filtered_years, filtered_num_athletes, average_num_athlete
             bars[i].set_color('#F5CDCB')
     bars[-1].set_color('#FE0000')
 
-    ax.set_xlabel('Year', fontweight='bold')
+    ax.set_xlabel('Olympic Year', fontweight='bold')
     ax.set_ylabel('Number of Athletes', fontweight='bold')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
