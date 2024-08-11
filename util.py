@@ -189,7 +189,7 @@ def add_title_and_lines(fig):
     )
 
     fig.suptitle(
-        "Indonesia Gets 2 Golds in Olympics 2024 \nDespite Limited Athlete Participation",
+        "Indonesia Wins 2 Golds at the Olympics 2024 \nDespite Limited Athlete Participation",
         fontsize=20,
         fontweight='bold',
         color='red',
