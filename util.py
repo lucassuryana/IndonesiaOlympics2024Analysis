@@ -8,7 +8,7 @@ def filter_years(years, rank):
     """Filter years based on rank data."""
     return [years[i] for i in range(len(rank)) if rank[i] > 0]
 
-def filter_data(years, num_athletes, rank, total_medals, gold, silver, bronze):
+def filter_data(years, num_athletes, rank, total_medals, gold, silver, bronze, sports_medals_gold , sports_medals_silver, sports_medals_bronze  ):
     """Filter data based on rank availability."""
     filtered_years = [years[i] for i in range(len(rank)) if rank[i] > 0]
     filtered_num_athletes = [num_athletes[i] for i in range(len(rank)) if rank[i] > 0]
@@ -17,43 +17,83 @@ def filter_data(years, num_athletes, rank, total_medals, gold, silver, bronze):
     filtered_gold = [gold[i] for i in range(len(rank)) if rank[i] > 0]
     filtered_silver = [silver[i] for i in range(len(rank)) if rank[i] > 0]
     filtered_bronze = [bronze[i] for i in range(len(rank)) if rank[i] > 0]
-    return filtered_years, filtered_num_athletes, filtered_rank, filtered_total_medals, filtered_gold, filtered_silver, filtered_bronze
+    filtered_sports_medal_gold =    [sports_medals_gold[i] for i in range(len(rank)) if rank[i] > 0]
+    filtered_sports_medal_silver =  [sports_medals_silver[i] for i in range(len(rank)) if rank[i] > 0]
+    filtered_sports_medal_bronze =  [sports_medals_bronze[i] for i in range(len(rank)) if rank[i] > 0]
+    return filtered_years, filtered_num_athletes, filtered_rank, filtered_total_medals, filtered_gold, filtered_silver, filtered_bronze, filtered_sports_medal_gold, filtered_sports_medal_silver, filtered_sports_medal_bronze
 
-def plot_medals(ax, filtered_years, filtered_rank, filtered_gold, filtered_silver, filtered_bronze):
+def plot_medals(ax, filtered_years, filtered_rank, filtered_gold, filtered_silver, filtered_bronze, filtered_sports_medal_gold, filtered_sports_medal_silver, filtered_sports_medal_bronze):
     """Plot medals on the provided axis."""
     # Overlay squares representing medals above the bars
-    square_size_1 = 1  # Side length of the square
-    square_size_2 = 2.5  # Side length of the square
-    square_vertical_spacing = 4  # Vertical spacing between rows of squares
+    square_size_1 = 2  # Side length of the square
+    square_size_2 = 5.5  # Side length of the square
+    square_vertical_spacing = 8  # Vertical spacing between rows of squares
     for i in range(len(filtered_years)):
-        y_base = filtered_rank[i] + 4
-
+        y_base = filtered_rank[i] + 5
         for j in range(filtered_gold[i]):
+            x_loc = filtered_years[i] - square_size_1 / 2
+            y_loc = y_base + j * square_vertical_spacing - square_size_1 / 2
             ax.add_patch(Rectangle(
-                (filtered_years[i] - square_size_1 / 2, y_base + j * square_vertical_spacing - square_size_1 / 2),
+                (x_loc, y_loc),
                 square_size_1,
                 square_size_2,
                 color='#FDC861',
                 zorder=10
             ))
 
+            sports_gold = filtered_sports_medal_gold[i][j]
+            sports_logo = mpimg.imread('sports/'+sports_gold+'.png')
+            if sports_gold == 'climbing':
+                imagebox_sports_logo = OffsetImage(sports_logo, zoom=0.026)
+            elif sports_gold == 'badminton':
+                imagebox_sports_logo = OffsetImage(sports_logo, zoom=0.014)
+            else:
+                imagebox_sports_logo = OffsetImage(sports_logo, zoom=0.015)
+            ax.add_artist(AnnotationBbox(imagebox_sports_logo, (x_loc + square_size_1/2, y_loc + square_size_2/2), frameon=False, pad=0.1, xycoords='data', box_alignment=(0.5, 0.5), zorder=11))
+
         for j in range(filtered_silver[i]):
+            x_loc = filtered_years[i] - square_size_1 / 2
+            y_loc = y_base + (filtered_gold[i] + j) * square_vertical_spacing - square_size_1 / 2
             ax.add_patch(Rectangle(
-                (filtered_years[i] - square_size_1 / 2, y_base + (filtered_gold[i] + j) * square_vertical_spacing - square_size_1 / 2),
+                (x_loc, y_loc),
                 square_size_1,
                 square_size_2,
                 color='#E5E5E5',
-                zorder=5
+                zorder=10
             ))
 
+            sports_silver = filtered_sports_medal_silver[i][j]
+            sports_logo = mpimg.imread('sports/'+sports_silver+'.png')
+            if sports_silver == 'climbing':
+                imagebox_sports_logo = OffsetImage(sports_logo, zoom=0.026)
+            elif sports_silver == 'badminton':
+                imagebox_sports_logo = OffsetImage(sports_logo, zoom=0.014)
+            elif sports_silver == 'archery':
+                imagebox_sports_logo = OffsetImage(sports_logo, zoom=0.008)
+            else:
+                imagebox_sports_logo = OffsetImage(sports_logo, zoom=0.015)
+            ax.add_artist(AnnotationBbox(imagebox_sports_logo, (x_loc + square_size_1/2, y_loc + square_size_2/2), frameon=False, pad=0.1, xycoords='data', box_alignment=(0.5, 0.5), zorder=11))
+
+
         for j in range(filtered_bronze[i]):
+            x_loc = filtered_years[i] - square_size_1 / 2
+            y_loc = y_base + (filtered_gold[i] + filtered_silver[i] + j) * square_vertical_spacing - square_size_1 / 2
             ax.add_patch(Rectangle(
-                (filtered_years[i] - square_size_1 / 2, y_base + (filtered_gold[i] + filtered_silver[i] + j) * square_vertical_spacing - square_size_1 / 2),
+                (x_loc, y_loc),
                 square_size_1,
                 square_size_2,
                 color='#DCB486',
-                zorder=5
+                zorder=10
             ))
+            sports_bronze = filtered_sports_medal_bronze[i][j]
+            sports_logo = mpimg.imread('sports/'+sports_bronze+'.png')
+            if sports_bronze == 'climbing':
+                imagebox_sports_logo = OffsetImage(sports_logo, zoom=0.026)
+            elif sports_bronze == 'badminton':
+                imagebox_sports_logo = OffsetImage(sports_logo, zoom=0.014)
+            else:
+                imagebox_sports_logo = OffsetImage(sports_logo, zoom=0.015)
+            ax.add_artist(AnnotationBbox(imagebox_sports_logo, (x_loc + square_size_1/2, y_loc + square_size_2/2), frameon=False, pad=0.1, xycoords='data', box_alignment=(0.5, 0.5), zorder=11))
 
     # First plot: Number of athletes over the years without y-axis
     ax.plot(filtered_years, filtered_rank, color='#D3322A', marker='o', linestyle='-', linewidth=1)
@@ -99,34 +139,34 @@ def plot_athletes(ax, filtered_years, filtered_num_athletes, average_num_athlete
     bars[-1].set_color('#FE0000')
 
     ax.set_xlabel('Olympic Year', fontweight='bold')
-    ax.set_ylabel('Number of Athletes', fontweight='bold')
+    ax.set_ylabel('Number of Sports', fontweight='bold')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.set_xticks(filtered_years)
     ax.set_xticklabels(filtered_years)
     ax.text(
         filtered_years[-1] + 4, average_num_athletes,
-        f'Average Number of\nIndonesian Athletes \nof all Years: {average_num_athletes:.0f}',
+        f'Average Number of\nSports Indonesia Competes \nIn Each Olympic Year: {average_num_athletes:.0f}',
         ha='left', va='center', color='black', fontsize=10,
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none')
     )
 
     ax.text(
-        filtered_years[-1] + 4, average_num_athletes + 20,
-        f'In the {filtered_years[-1]:.0f} Olympics, \nIndonesia sent \n{filtered_num_athletes[-1]:.0f} athletes',
+        filtered_years[-1] + 4, average_num_athletes + 8,
+        f'In the {filtered_years[-1]:.0f} Olympics, \nIndonesia participaed in \n{filtered_num_athletes[-1]:.0f} sports',
         ha='left', va='center', color='black', fontsize=10,
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none')
     )
 
     ax.text(
-        filtered_years[0] - 7 , -15,
+        filtered_years[0] - 7 , -5,
         f'Data Source: Wikipedia - Indonesia \nat the 2024 Summer Olympics',
         ha='left', va='center', color='#C1C1C1', fontsize=10,
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none')
     )
 
     ax.text(
-        filtered_years[-1] , -15,
+        filtered_years[-1] , -5,
         f'© 2024 Lucas Elbert Suryana',
         ha='left', va='center', color='#C1C1C1', fontsize=10,
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none')
@@ -145,12 +185,12 @@ def add_images(ax, flag_img_path, logo_img_path, filtered_years, filtered_num_at
     imagebox_flag = OffsetImage(indonesia_flag, zoom=0.02)
     imagebox_logo = OffsetImage(olympic_logo, zoom=0.04)
 
-    ax.add_artist(AnnotationBbox(imagebox_flag, (0.83, 1.1), frameon=True, pad=0.1, xycoords='axes fraction', box_alignment=(1, 1)))
-    ax.add_artist(AnnotationBbox(imagebox_logo, (1.005, 1.15), frameon=False, pad=0, xycoords='axes fraction', box_alignment=(1, 1)))
+    ax.add_artist(AnnotationBbox(imagebox_flag, (0.969, 1.69), frameon=True, pad=0.1, xycoords='axes fraction', box_alignment=(1, 1)))
+    ax.add_artist(AnnotationBbox(imagebox_logo, (0.99, 1.5), frameon=False, pad=0, xycoords='axes fraction', box_alignment=(1, 1)))
 
     # Define the arrow positions
-    arrow_start = (0.926, 0.78)  # Position near the Olympic logo in axes fraction
-    arrow_end = (filtered_years[-1], filtered_num_athletes[-1] + 3)  # Position at the top of the last bar in data space
+    arrow_start = (0.926, 0.9)  # Position near the Olympic logo in axes fraction
+    arrow_end = (filtered_years[-1], filtered_num_athletes[-1] + 4)  # Position at the top of the last bar in data space
 
     ax.annotate(
         '', 
@@ -189,7 +229,7 @@ def add_title_and_lines(fig):
     )
 
     fig.suptitle(
-        "Indonesia Wins 2 Golds at the Olympics 2024 \nDespite Limited Athlete Participation",
+        "Indonesia Wins 2 Golds at the Olympics 2024 \nSetting a New Record with Medals in Three Sports",
         fontsize=20,
         fontweight='bold',
         color='red',
@@ -200,8 +240,8 @@ def add_title_and_lines(fig):
     )
 
     fig.text(
-        0, 0.941,
-        'Indonesia at the Olympics: Performance and Athlete Participation \nOver the Years',
+        0, 0.95,
+        'Indonesia at the Olympics: Performance and Sports Participation \nOver the Years',
         fontsize=12,
         fontweight='bold',
         color='black',
