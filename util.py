@@ -203,7 +203,7 @@ def plot_sports(ax, filtered_years, filtered_num_sports, average_num_sports):
 
     ax.text(
         filtered_years[-1] + 4, average_num_sports + 8,
-        f'In the {filtered_years[-1]:.0f} Olympics, \nIndonesia participaed in \n{filtered_num_sports[-1]:.0f} sports',
+        f'In the {filtered_years[-1]:.0f} Olympics, \nIndonesia participated in \n{filtered_num_sports[-1]:.0f} sports',
         ha='left', va='center', color='black', fontsize=10,
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none')
     )
